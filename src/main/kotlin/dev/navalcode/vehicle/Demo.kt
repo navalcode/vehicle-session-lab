@@ -2,8 +2,24 @@ package dev.navalcode.vehicle
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import kotlin.system.exitProcess
 
-fun main() = runBlocking {
+fun main(args: Array<String>) {
+    val options = try {
+        parseOptions(args)
+    } catch (invalid: IllegalArgumentException) {
+        System.err.println(invalid.message)
+        exitProcess(2)
+    }
+    if (options.help) {
+        println("Vehicle Session Lab\nUsage: ./gradlew -q run --args='--language en|es'\n--help  Show help without running the simulation.")
+        return
+    }
+    runDemo(options.language)
+}
+
+fun runDemo(language: String) = runBlocking {
+    val es = language == "es"
     var opened = 0
     var closed = 0
     val gateway = VehicleGateway { callback ->
@@ -24,18 +40,17 @@ fun main() = runBlocking {
     val session = VehicleSession(this, gateway, staleAfterMs = 600)
     val observation = launch {
         session.state.collect { state ->
-            val values = state.samples.entries.joinToString { (metric, sample) ->
-                "${metric.name}=${sample.value ?: "unavailable"} ${metric.unit}${if (sample.stale) " (stale)" else ""}"
-            }
-            println("${state.phase} attempt=${state.attempt} rejected=${state.rejected} $values ${state.reason.orEmpty()}")
+            println(renderSnapshot(state, language))
+            println()
         }
     }
-    println("FICTIONAL DATA · read-only simulation · no vehicle connection")
+    println(if (es) "DATOS FICTICIOS · simulación de solo lectura · sin conexión a un vehículo" else "FICTIONAL DATA · read-only simulation · no vehicle connection")
+    println(if (es) "Snapshots de StateFlow; no son un registro completo de eventos.\n" else "StateFlow snapshots; not a complete event journal.\n")
     session.start()
     delay(1_800)
     session.stop()
     yield()
     observation.cancelAndJoin()
-    println("Resources: opened=$opened closed=$closed")
+    println(if (es) "Suscripciones: abiertas=$opened cerradas=$closed" else "Subscriptions: opened=$opened closed=$closed")
     check(opened == closed)
 }

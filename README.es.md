@@ -12,7 +12,9 @@ JDK 17; wrapper Gradle 8.14.3 con SHA-256, Kotlin 2.2.10, Coroutines 1.10.2 y JU
 
 ```sh
 ./gradlew test
-./gradlew run
+./gradlew -q run
+./gradlew -q run --args='--language es'
+./gradlew -q run --args='--help'
 ```
 
 La demo conecta, recibe batería/temperatura/velocidad, rechaza una velocidad inválida, reconecta tras una desconexión y marca datos obsoletos. Se detiene a los 1,8 segundos y comprueba que cada suscripción abierta se cerró. StateFlow combina estados rápidos; la salida no es un diario completo de eventos.
@@ -43,3 +45,7 @@ Una integración real exigiría adaptar permisos, disponibilidad, áreas, timest
 ## Licencia
 
 Código y documentación originales: [MIT](LICENSE), Manuel Naval, 2026. Dependencias y wrapper conservan sus licencias; [avisos de terceros](THIRD_PARTY.md).
+
+Los snapshots del terminal usan un orden estable y distinguen sin lectura, no disponible, vigente y obsoleta. `--language en|es` selecciona las etiquetas; los códigos enum/motivos siguen estables. `--help` no arranca la simulación; las opciones inválidas salen con2. Usa `-q` para separar el progreso de Gradle de la salida de la demo. [Decisiones de presentación](DESIGN.md).
+
+El incremento de presentación del terminal pasa localmente 23 tests. Los enlaces de CI anteriores conservan su alcance registrado; el badge lleva a los resultados actuales.

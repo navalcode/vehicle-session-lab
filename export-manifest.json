@@ -8,16 +8,20 @@
     "sha256": "231c52dfc1018efb09c75374c6c4494f56d38a40a7d3c9c0bedc533f7e74850d"
   },
   {
+    "path": "DESIGN.md",
+    "sha256": "7a354c076bea4a1b7d8466a0d20e3bcb69ed2aae15456bfbda2658a6e0bacb98"
+  },
+  {
     "path": "LICENSE",
     "sha256": "8ee98a68db08740852b491de91922961bb928aaa13f9897c078a0e6eb3e1218a"
   },
   {
     "path": "README.es.md",
-    "sha256": "915664c0df9a6eca0a4be7c1c09ec2f76fe438b54f7569af0b3409074633f9c0"
+    "sha256": "3019474f4817f1ac7ee65167c482c0fc6931bf31fbdc8df356dcf0b911380faf"
   },
   {
     "path": "README.md",
-    "sha256": "2884c83df42301bf3520cf55782db0d6b67baf32531f077252ef622d381f616a"
+    "sha256": "7c4f2e5c9fab0b864fb89ae6797ee7eec11a6e60a5b5219c113271aaf79598bc"
   },
   {
     "path": "THIRD_PARTY.md",
@@ -53,11 +57,19 @@
   },
   {
     "path": "src/main/kotlin/dev/navalcode/vehicle/Demo.kt",
-    "sha256": "86237a658b5f34a79291dad4b49c7dc9857a89f87f7ac548262906f1357f4d42"
+    "sha256": "f3cf48a38437e62952215bb18f4d4d2a1cdbcc30e46264a674e00cfb4440cad7"
+  },
+  {
+    "path": "src/main/kotlin/dev/navalcode/vehicle/Presentation.kt",
+    "sha256": "ebb3a4c659214f8f906a965cd1c9130659481635664d5bd5df74f1abf8766346"
   },
   {
     "path": "src/main/kotlin/dev/navalcode/vehicle/VehicleSession.kt",
     "sha256": "8ce07a98b452bdc4398f3deef7f7ec84f4444af5c6240f85a9ae7453660efad8"
+  },
+  {
+    "path": "src/test/kotlin/dev/navalcode/vehicle/PresentationTest.kt",
+    "sha256": "a45a4305a3d79067f87c013e4159461bc54f2a4b4003ecf0f0c4318ff303785b"
   },
   {
     "path": "src/test/kotlin/dev/navalcode/vehicle/VehicleSessionTest.kt",

@@ -12,7 +12,9 @@ Requires JDK 17. The Gradle 8.14.3 wrapper includes the distribution SHA-256. Ko
 
 ```sh
 ./gradlew test
-./gradlew run
+./gradlew -q run
+./gradlew -q run --args='--language es'
+./gradlew -q run --args='--help'
 ```
 
 The demo opens a simulated connection, receives battery/cabin/speed readings, rejects an invalid speed, reconnects after a disconnect and marks quiet metrics stale. It stops after 1.8 seconds and checks that every opened subscription was closed. StateFlow is conflated: the printed snapshots are observable state, not a complete event journal.
@@ -46,3 +48,7 @@ A real adapter would map platform lifecycle, property availability, areas, sourc
 ## License
 
 Original source and documentation: [MIT](LICENSE), Manuel Naval, 2026. Dependencies and Gradle wrapper retain their own licenses; see [third-party notices](THIRD_PARTY.md).
+
+Terminal snapshots use stable metric order and explicitly distinguish no reading, unavailable, current and stale values. `--language en|es` selects the human labels; enum/reason codes stay stable. `--help` does not start the simulation; invalid options exit 2. Use `-q` to keep Gradle progress out of the demo output. [Presentation decisions](DESIGN.md).
+
+The terminal presentation increment passes 23 tests locally. Earlier CI links retain their recorded scope; use the workflow badge for current results.
