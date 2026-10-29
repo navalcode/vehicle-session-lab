@@ -8,7 +8,7 @@ Laboratorio Kotlin/JVM original para observar la propiedad de recursos en una fr
 
 ## Ejecutar
 
-JDK17; wrapper Gradle8.14.3 con SHA-256, Kotlin2.2.10, Coroutines1.10.2 y JUnit4.13.2 fijados.
+JDK 17; wrapper Gradle 8.14.3 con SHA-256, Kotlin 2.2.10, Coroutines 1.10.2 y JUnit 4.13.2 fijados.
 
 ```sh
 ./gradlew test
@@ -34,7 +34,7 @@ El adaptador debe abrir sin bloquear, devolver un cierre idempotente/no bloquean
 
 ## Evidencia y límites
 
-Validación local JDK17: **20 tests JVM y demo ejecutable correctos**. CI preparada, pendiente de registrar su resultado remoto real.
+Validación local JDK 17: **20 tests JVM y demo ejecutable correctos**. [CI correcta en GitHub](https://github.com/navalcode/vehicle-session-lab/actions/runs/40877568376), incluidos los tests y la demo ejecutable.
 
 No implementa CarPropertyManager/VHAL, áreas, componente de ciclo de vida Android, permisos OEM, Android Auto, validación de hardware o seguridad funcional. La antigüedad usa el reloj monotónico de recepción local, no un timestamp del sensor. Los rangos son ejemplos y no especificaciones de vehículos.
 

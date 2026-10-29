@@ -37,7 +37,7 @@ Each acquired lease is closed in `finally`. An adapter must provide a nonblockin
 
 ## Verification and limits
 
-Local JDK 17 validation: **20 JVM tests and the executable demo pass**. Tests cover real behavior rather than Android permission or vehicle compatibility. CI is prepared; a remote result is recorded only after it runs.
+Local JDK 17 validation: **20 JVM tests and the executable demo pass**. Tests cover real behavior rather than Android permission or vehicle compatibility. [CI passed on GitHub](https://github.com/navalcode/vehicle-session-lab/actions/runs/40877568376), including all tests and the executable demo.
 
 This is **not an Android Car adapter**. There is no CarPropertyManager/VHAL integration, area mapping, Android lifecycle component, OEM permission, Android Auto projection, hardware validation or functional-safety claim. Freshness measures local receipt time, not the age of a vehicle sensor measurement. No command writes to a vehicle.
 
