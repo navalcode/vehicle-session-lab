@@ -1,0 +1,74 @@
+[
+  {
+    "path": ".github/workflows/checks.yml",
+    "sha256": "798142329e3d09827c9f72bdac85b8ec2502c1712cbe5e2aedf09152703ba3b8"
+  },
+  {
+    "path": ".gitignore",
+    "sha256": "231c52dfc1018efb09c75374c6c4494f56d38a40a7d3c9c0bedc533f7e74850d"
+  },
+  {
+    "path": "LICENSE",
+    "sha256": "8ee98a68db08740852b491de91922961bb928aaa13f9897c078a0e6eb3e1218a"
+  },
+  {
+    "path": "README.es.md",
+    "sha256": "fe139670dc53c55f1da412dbd9c6d2600406ceba87ddc8af9c79a0cf52f3b199"
+  },
+  {
+    "path": "README.md",
+    "sha256": "e2628013d9b90f5b190cf03831bf95672b86c271cfef5590f2bddf7a46b1d186"
+  },
+  {
+    "path": "THIRD_PARTY.md",
+    "sha256": "3a6a4924feccbcb3fbfd9919b5a7558ea5bf28feeeaebc2b40d65eb893b2cb11"
+  },
+  {
+    "path": "build.gradle.kts",
+    "sha256": "9298fdd91a368a186a4439ffb49288684877d5a0af67103232bea0c4a90bc79b"
+  },
+  {
+    "path": "docs/ARCHITECTURE.md",
+    "sha256": "edbb24e47932090dfc9ef294eba6c5a105c83f5253f1103a031bcf6d50fc6efc"
+  },
+  {
+    "path": "gradle/wrapper/gradle-wrapper.jar",
+    "sha256": "7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172"
+  },
+  {
+    "path": "gradle/wrapper/gradle-wrapper.properties",
+    "sha256": "7d09e69815e4c5a1c20cab8bc15cccd07922939f16bd6470a7436f709774eae4"
+  },
+  {
+    "path": "gradlew",
+    "sha256": "b187b4c52e749f5760afdd6fadc31b2a98ad35fb249bf0dff03b72650f320409"
+  },
+  {
+    "path": "gradlew.bat",
+    "sha256": "1d297e00bd21de3ace22b4d7f2de1f9dfa858883d66bbf7c1ccbecccec8f4f3b"
+  },
+  {
+    "path": "settings.gradle.kts",
+    "sha256": "4f3deff4bb7870a1d6940926f8d8232df79ee31f412f1743d0deea64b4716c0b"
+  },
+  {
+    "path": "src/main/kotlin/dev/navalcode/vehicle/Demo.kt",
+    "sha256": "86237a658b5f34a79291dad4b49c7dc9857a89f87f7ac548262906f1357f4d42"
+  },
+  {
+    "path": "src/main/kotlin/dev/navalcode/vehicle/VehicleSession.kt",
+    "sha256": "8ce07a98b452bdc4398f3deef7f7ec84f4444af5c6240f85a9ae7453660efad8"
+  },
+  {
+    "path": "src/test/kotlin/dev/navalcode/vehicle/VehicleSessionTest.kt",
+    "sha256": "e2ecbbe2dc95a5f62356c2e386c9776f97ed1bcfc3ec5784007d38a88c553f9b"
+  },
+  {
+    "path": "third_party/gradle-LICENSE.txt",
+    "sha256": "9536d88ea948603d18e232a13f5958d67807cd80828036b082bff171d2cf0703"
+  },
+  {
+    "path": "third_party/gradle-NOTICE.txt",
+    "sha256": "c2de5fd9adc7ccc4e1382a0e1f38ec6e14f8ca6e28d3c20289fe80353b019aa1"
+  }
+]
