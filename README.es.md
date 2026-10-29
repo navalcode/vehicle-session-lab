@@ -1,6 +1,6 @@
 # Vehicle Session Lab
 
-[English](README.md)
+[English](README.md) · [![CI](https://github.com/navalcode/vehicle-session-lab/actions/workflows/checks.yml/badge.svg)](https://github.com/navalcode/vehicle-session-lab/actions/workflows/checks.yml)
 
 Laboratorio Kotlin/JVM original para observar la propiedad de recursos en una frontera de integración Automotive. Un proveedor ficticio entrega métricas por callbacks. La sesión gestiona plazos de conexión, reconexiones acotadas, callbacks tardíos, valores inválidos y antigüedad por métrica.
 

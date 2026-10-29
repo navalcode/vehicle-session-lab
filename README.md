@@ -1,6 +1,6 @@
 # Vehicle Session Lab
 
-[Español](README.es.md)
+[Español](README.es.md) · [![CI](https://github.com/navalcode/vehicle-session-lab/actions/workflows/checks.yml/badge.svg)](https://github.com/navalcode/vehicle-session-lab/actions/workflows/checks.yml)
 
 An original Kotlin/JVM lab for inspecting lifecycle ownership at an Automotive integration boundary. A fictional callback gateway emits read-only vehicle metrics. The consumer handles connection deadlines, bounded reconnection, late callbacks, invalid values and per-metric freshness.
 
