@@ -18,18 +18,18 @@ JDK 17; wrapper Gradle 8.14.3 con SHA-256, Kotlin 2.2.10, Coroutines 1.10.2 y JU
 ./gradlew -q run --args='--language es --help'
 ```
 
-La demo conecta, recibe batería/temperatura/velocidad, rechaza una velocidad inválida, reconecta tras una desconexión y marca datos obsoletos. Se detiene a los 1,8 segundos y comprueba que cada suscripción abierta se cerró. StateFlow combina estados rápidos; la salida no es un diario completo de eventos.
+La demo conecta, recibe batería/temperatura/velocidad, rechaza una velocidad inválida, reconecta tras una desconexión y marca datos obsoletos. Se detiene a los 1,8 segundos y comprueba que cada suscripción abierta se cerró. StateFlow puede omitir estados intermedios; la salida no es un diario completo de eventos.
 
 ## Comportamiento
 
 - Inicio idempotente y observación de solo lectura; cada conexión tiene su propia cola y suscripción.
 - Ready debe ser el primer evento y llegar dentro del plazo. Si no llega o el protocolo falla, se cierra y se reintenta.
 - Desconectar vacía datos en vivo. Hay dos reconexiones adicionales como máximo; un inicio manual renueva el presupuesto agotado.
-- Parada y cancelación del propietario cierran la suscripción y limpian estado. Un deadline del padre sigue siendo cancelación del padre, no un fallo reintentable de la fuente.
+- Parada y cancelación del propietario cierran la suscripción y limpian estado. Si vence el plazo del scope padre, la sesión se cancela sin reintentar la conexión.
 - Los callbacks tardíos quedan en un canal cerrado y no modifican la sesión nueva.
 - Secuencias repetidas/regresivas, valores no finitos o fuera de rango no sustituyen lecturas aceptadas. La secuencia pertenece a cada métrica/conexión.
 - Un valor nulo representa indisponibilidad explícita y puede recuperarse. Una métrica que deja de actualizarse se marca obsoleta aunque otras sigan llegando.
-- La cola admite 64 eventos pendientes. Saturarla falla la conexión de forma explícita y usa el mismo presupuesto de recuperación.
+- La cola admite 64 eventos pendientes. Si se satura, la conexión falla de forma explícita y se aplica el mismo límite de reintentos.
 
 [`VehicleSession.kt`](src/main/kotlin/dev/navalcode/vehicle/VehicleSession.kt) contiene contratos y coordinador; [`Demo.kt`](src/main/kotlin/dev/navalcode/vehicle/Demo.kt), el simulador; los [tests](src/test/kotlin/dev/navalcode/vehicle/VehicleSessionTest.kt) usan tiempo virtual y callbacks antiguos retenidos. [Arquitectura](docs/ARCHITECTURE.md) detalla las decisiones.
 
