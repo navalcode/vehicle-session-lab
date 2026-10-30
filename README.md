@@ -2,9 +2,9 @@
 
 [Español](README.es.md) · [![CI](https://github.com/navalcode/vehicle-session-lab/actions/workflows/checks.yml/badge.svg)](https://github.com/navalcode/vehicle-session-lab/actions/workflows/checks.yml)
 
-An original Kotlin/JVM lab for inspecting lifecycle ownership at an Automotive integration boundary. A fictional callback gateway emits read-only vehicle metrics. The consumer handles connection deadlines, bounded reconnection, late callbacks, invalid values and per-metric freshness.
+A Kotlin/JVM simulation of callback-based vehicle data. Follow a connection through startup, invalid readings, disconnect, retry and cleanup. Each subscription belongs to an observer lifetime; callbacks from a replaced connection cannot change the active session.
 
-**No vehicle, Android Car service, account or API key is required.** This is a host-side simulation with deliberately invented data and ranges. It does not control a vehicle.
+The gateway, data and ranges are fictional. Run it on a host JDK without a vehicle, account or Android Car service. The program observes simulated values and sends no vehicle-control commands.
 
 ## Run it
 
@@ -15,6 +15,7 @@ Requires JDK 17. The Gradle 8.14.3 wrapper includes the distribution SHA-256. Ko
 ./gradlew -q run
 ./gradlew -q run --args='--language es'
 ./gradlew -q run --args='--help'
+./gradlew -q run --args='--language es --help'
 ```
 
 The demo opens a simulated connection, receives battery/cabin/speed readings, rejects an invalid speed, reconnects after a disconnect and marks quiet metrics stale. It stops after 1.8 seconds and checks that every opened subscription was closed. StateFlow is conflated: the printed snapshots are observable state, not a complete event journal.
@@ -37,18 +38,12 @@ The demo opens a simulated connection, receives battery/cabin/speed readings, re
 
 Each acquired lease is closed in `finally`. An adapter must provide a nonblocking `open`, return an idempotent/nonblocking cleanup handle and own cleanup if it throws before returning a handle. Calling start/stop belongs to one owner dispatcher; callbacks can come from other threads. [Architecture and limits](docs/ARCHITECTURE.md) record the contract and tradeoffs.
 
-## Verification and limits
+## Checks and platform limits
 
-Local JDK 17 validation: **20 JVM tests and the executable demo pass**. Tests cover real behavior rather than Android permission or vehicle compatibility. [CI passed on GitHub](https://github.com/navalcode/vehicle-session-lab/actions/runs/40877568376), including all tests and the executable demo.
+**23 JVM tests** cover session behavior, presentation and option validation. The executable demo closes every opened subscription; `--help` returns before opening one. [Verification](docs/VERIFICATION.md) records actual EN/ES runs, error exits, artifact commands and current CI. [DESIGN.md](DESIGN.md) explains the terminal output.
 
-This is **not an Android Car adapter**. There is no CarPropertyManager/VHAL integration, area mapping, Android lifecycle component, OEM permission, Android Auto projection, hardware validation or functional-safety claim. Freshness measures local receipt time, not the age of a vehicle sensor measurement. No command writes to a vehicle.
-
-A real adapter would map platform lifecycle, property availability, areas, source timestamps and permissions explicitly, then require its own platform and hardware tests. Relevant official APIs are [Car lifecycle](https://developer.android.com/reference/android/car/Car) and [CarPropertyManager](https://developer.android.com/reference/android/car/hardware/property/CarPropertyManager). The lab contract is intentionally smaller and does not promise API equivalence.
+This host simulation includes no Android Car adapter, CarPropertyManager/VHAL integration, area mapping, OEM permissions or Android Auto projection. Freshness uses local receipt time and does not establish the age or accuracy of a sensor measurement. A real adapter needs its own platform lifecycle, property mapping, source timestamps, permissions and hardware tests. The [architecture](docs/ARCHITECTURE.md) describes those boundaries.
 
 ## License
 
 Original source and documentation: [MIT](LICENSE), Manuel Naval, 2026. Dependencies and Gradle wrapper retain their own licenses; see [third-party notices](THIRD_PARTY.md).
-
-Terminal snapshots use stable metric order and explicitly distinguish no reading, unavailable, current and stale values. `--language en|es` selects the human labels; enum/reason codes stay stable. `--help` does not start the simulation; invalid options exit 2. Use `-q` to keep Gradle progress out of the demo output. [Presentation decisions](DESIGN.md).
-
-The terminal presentation increment passes 23 tests locally. Earlier CI links retain their recorded scope; use the workflow badge for current results.

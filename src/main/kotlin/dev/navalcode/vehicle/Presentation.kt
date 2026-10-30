@@ -24,10 +24,10 @@ fun parseOptions(args: Array<String>): DemoOptions {
 
 fun renderSnapshot(state: SessionState, language: String): String {
     val es = language == "es"
-    val labels = if (es) listOf("Velocidad", "Batería", "Cabina") else listOf("Speed", "Battery", "Cabin")
+    val labels = if (es) listOf("Velocidad", "Batería", "Temperatura interior") else listOf("Speed", "Battery", "Cabin temperature")
     val lines = mutableListOf(
         "${if (es) "Estado" else "State"}: ${state.phase} | ${if (es) "Intento" else "Attempt"}: ${state.attempt} | " +
-            "${if (es) "Rechazadas" else "Rejected"}: ${state.rejected}"
+            "${if (es) "Lecturas rechazadas" else "Rejected readings"}: ${state.rejected}"
     )
     Metric.entries.forEachIndexed { index, metric ->
         val sample = state.samples[metric]
@@ -41,4 +41,20 @@ fun renderSnapshot(state: SessionState, language: String): String {
     }
     state.reason?.let { lines += "  ${if (es) "Motivo" else "Reason"}: $it" }
     return lines.joinToString("\n")
+}
+
+fun renderHelp(language: String): String = if (language == "es") {
+    """Vehicle Session Lab
+Uso: ./gradlew -q run --args='--language en|es'
+--language en|es  Idioma de las etiquetas y la ayuda; inglés por defecto.
+--help, -h        Mostrar esta ayuda sin iniciar la simulación.
+Los códigos de estado y motivo mantienen sus identificadores.
+""".trimEnd()
+} else {
+    """Vehicle Session Lab
+Usage: ./gradlew -q run --args='--language en|es'
+--language en|es  Label and help language; English by default.
+--help, -h        Show this help without starting the simulation.
+Phase and reason codes retain their identifiers.
+""".trimEnd()
 }

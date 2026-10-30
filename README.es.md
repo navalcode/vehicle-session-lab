@@ -2,9 +2,9 @@
 
 [English](README.md) · [![CI](https://github.com/navalcode/vehicle-session-lab/actions/workflows/checks.yml/badge.svg)](https://github.com/navalcode/vehicle-session-lab/actions/workflows/checks.yml)
 
-Laboratorio Kotlin/JVM original para observar la propiedad de recursos en una frontera de integración Automotive. Un proveedor ficticio entrega métricas por callbacks. La sesión gestiona plazos de conexión, reconexiones acotadas, callbacks tardíos, valores inválidos y antigüedad por métrica.
+Simulación Kotlin/JVM de datos de vehículo recibidos por callbacks. Permite seguir la conexión inicial, las lecturas inválidas, la desconexión, el reintento y la liberación de recursos. Cada suscripción dura lo que su observador; los callbacks de una conexión sustituida no pueden modificar la sesión activa.
 
-**No necesita vehículo, servicio Android Car, cuenta o clave.** Los datos y rangos son inventados. No controla un vehículo.
+El proveedor, los datos y los rangos son ficticios. Se ejecuta en un JDK del equipo, sin vehículo, cuenta ni servicio Android Car. El programa observa valores simulados y no envía órdenes de control.
 
 ## Ejecutar
 
@@ -15,6 +15,7 @@ JDK 17; wrapper Gradle 8.14.3 con SHA-256, Kotlin 2.2.10, Coroutines 1.10.2 y JU
 ./gradlew -q run
 ./gradlew -q run --args='--language es'
 ./gradlew -q run --args='--help'
+./gradlew -q run --args='--language es --help'
 ```
 
 La demo conecta, recibe batería/temperatura/velocidad, rechaza una velocidad inválida, reconecta tras una desconexión y marca datos obsoletos. Se detiene a los 1,8 segundos y comprueba que cada suscripción abierta se cerró. StateFlow combina estados rápidos; la salida no es un diario completo de eventos.
@@ -34,18 +35,12 @@ La demo conecta, recibe batería/temperatura/velocidad, rechaza una velocidad in
 
 El adaptador debe abrir sin bloquear, devolver un cierre idempotente/no bloqueante y limpiar sus propios recursos si falla antes de devolverlo. Start/stop pertenecen a un dispatcher propietario; los callbacks pueden venir de otros hilos. Cada handle adquirido se cierra en `finally`.
 
-## Evidencia y límites
+## Comprobaciones y límites de plataforma
 
-Validación local JDK 17: **20 tests JVM y demo ejecutable correctos**. [CI correcta en GitHub](https://github.com/navalcode/vehicle-session-lab/actions/runs/40877568376), incluidos los tests y la demo ejecutable.
+**23 tests JVM** cubren la sesión, la presentación y la validación de opciones. La demo cierra todas las suscripciones que abre; `--help` termina antes de abrir ninguna. [Verificación](docs/VERIFICATION.md), en inglés, recoge ejecuciones EN/ES reales, errores, comandos de artefactos y CI actual. [DESIGN.md](DESIGN.md) explica la salida de terminal.
 
-No implementa CarPropertyManager/VHAL, áreas, componente de ciclo de vida Android, permisos OEM, Android Auto, validación de hardware o seguridad funcional. La antigüedad usa el reloj monotónico de recepción local, no un timestamp del sensor. Los rangos son ejemplos y no especificaciones de vehículos.
-
-Una integración real exigiría adaptar permisos, disponibilidad, áreas, timestamps y ciclo de vida de plataforma, con pruebas propias de plataforma/hardware. Referencias oficiales: [Car](https://developer.android.com/reference/android/car/Car) y [CarPropertyManager](https://developer.android.com/reference/android/car/hardware/property/CarPropertyManager). Este contrato no promete equivalencia con esas APIs.
+La simulación no incluye adaptador Android Car, integración CarPropertyManager/VHAL, áreas, permisos OEM ni proyección Android Auto. La antigüedad se mide desde la recepción local y no acredita la edad o exactitud de la medición del sensor. Un adaptador real necesita ciclo de vida de plataforma, mapeo de propiedades, timestamps de origen, permisos y pruebas de hardware propios. [Arquitectura](docs/ARCHITECTURE.md) explica esos límites.
 
 ## Licencia
 
 Código y documentación originales: [MIT](LICENSE), Manuel Naval, 2026. Dependencias y wrapper conservan sus licencias; [avisos de terceros](THIRD_PARTY.md).
-
-Los snapshots del terminal usan un orden estable y distinguen sin lectura, no disponible, vigente y obsoleta. `--language en|es` selecciona las etiquetas; los códigos enum/motivos siguen estables. `--help` no arranca la simulación; las opciones inválidas salen con2. Usa `-q` para separar el progreso de Gradle de la salida de la demo. [Decisiones de presentación](DESIGN.md).
-
-El incremento de presentación del terminal pasa localmente 23 tests. Los enlaces de CI anteriores conservan su alcance registrado; el badge lleva a los resultados actuales.

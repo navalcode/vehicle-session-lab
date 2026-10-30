@@ -9,7 +9,7 @@
   },
   {
     "path": "DESIGN.md",
-    "sha256": "7a354c076bea4a1b7d8466a0d20e3bcb69ed2aae15456bfbda2658a6e0bacb98"
+    "sha256": "ed8c314d0f4fd270f8de6c7a82cb66b5734b806790de8cef4d8effe1da02e51a"
   },
   {
     "path": "LICENSE",
@@ -17,11 +17,11 @@
   },
   {
     "path": "README.es.md",
-    "sha256": "3019474f4817f1ac7ee65167c482c0fc6931bf31fbdc8df356dcf0b911380faf"
+    "sha256": "8011d8141b3203699a5a8d17d63fcd6007aa12e1aa82be5ddfe33ed36b607ea8"
   },
   {
     "path": "README.md",
-    "sha256": "7c4f2e5c9fab0b864fb89ae6797ee7eec11a6e60a5b5219c113271aaf79598bc"
+    "sha256": "6bd47da814fdbdd52998a80502274248f26a3754b0d69a077be0d1a790642b25"
   },
   {
     "path": "THIRD_PARTY.md",
@@ -33,7 +33,11 @@
   },
   {
     "path": "docs/ARCHITECTURE.md",
-    "sha256": "edbb24e47932090dfc9ef294eba6c5a105c83f5253f1103a031bcf6d50fc6efc"
+    "sha256": "43d10ac6193ed749c4597a357897d880fae45203949c1af8b06cf0b34d0da2ca"
+  },
+  {
+    "path": "docs/VERIFICATION.md",
+    "sha256": "7b384c775988afaa63fcce45baef3c4967ce2e1629543632468382ffe9852585"
   },
   {
     "path": "gradle/wrapper/gradle-wrapper.jar",
@@ -57,11 +61,11 @@
   },
   {
     "path": "src/main/kotlin/dev/navalcode/vehicle/Demo.kt",
-    "sha256": "f3cf48a38437e62952215bb18f4d4d2a1cdbcc30e46264a674e00cfb4440cad7"
+    "sha256": "52d2a81e495a5530871b132a420c61ca16c0bdb65cbf324de9ef5ee016e7bed2"
   },
   {
     "path": "src/main/kotlin/dev/navalcode/vehicle/Presentation.kt",
-    "sha256": "ebb3a4c659214f8f906a965cd1c9130659481635664d5bd5df74f1abf8766346"
+    "sha256": "d30ac8720f43b49e58386e3e7ec61f6e8bc806bead5af3999d0626a6e3b9058d"
   },
   {
     "path": "src/main/kotlin/dev/navalcode/vehicle/VehicleSession.kt",

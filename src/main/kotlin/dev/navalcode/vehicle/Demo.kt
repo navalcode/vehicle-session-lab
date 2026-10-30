@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
         exitProcess(2)
     }
     if (options.help) {
-        println("Vehicle Session Lab\nUsage: ./gradlew -q run --args='--language en|es'\n--help  Show help without running the simulation.")
+        println(renderHelp(options.language))
         return
     }
     runDemo(options.language)
@@ -44,8 +44,8 @@ fun runDemo(language: String) = runBlocking {
             println()
         }
     }
-    println(if (es) "DATOS FICTICIOS · simulación de solo lectura · sin conexión a un vehículo" else "FICTIONAL DATA · read-only simulation · no vehicle connection")
-    println(if (es) "Snapshots de StateFlow; no son un registro completo de eventos.\n" else "StateFlow snapshots; not a complete event journal.\n")
+    println(if (es) "Datos ficticios · simulación de solo lectura · sin conexión a un vehículo" else "Fictional data · read-only simulation · no vehicle connection")
+    println(if (es) "StateFlow muestra el estado más reciente y puede omitir estados intermedios.\n" else "StateFlow shows the latest state and may omit intermediate states.\n")
     session.start()
     delay(1_800)
     session.stop()

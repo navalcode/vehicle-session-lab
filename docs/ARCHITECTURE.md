@@ -28,6 +28,6 @@ A 64-event buffer bounds memory. Saturation invalidates the session rather than 
 
 ## Platform work still required
 
-An AAOS adapter would need supported SDK/API versions, lifecycle callback handling, per-property availability and permissions, area IDs, source timestamps, error callbacks and service loss. The official Car documentation calls for disconnecting the instance before its Context is released. Current CarPropertyManager documentation exposes subscribe/unsubscribe APIs and deprecates older registration APIs; API selection must be validated for the actual target.
+An AAOS adapter would need supported SDK/API versions, lifecycle callback handling, per-property availability and permissions, area IDs, source timestamps, error callbacks and service loss. The official Car documentation calls for disconnecting the instance before its Context is released. Property API selection must be validated for the actual target.
 
-Primary references checked on 29 October 2026: [Car](https://developer.android.com/reference/android/car/Car), [CarPropertyManager](https://developer.android.com/reference/android/car/hardware/property/CarPropertyManager). No platform implementation or permission validation is inferred from this host test suite.
+The [Car lifecycle reference](https://developer.android.com/reference/android/car/Car) was rechecked on 30 October 2026. Platform references: [Car](https://developer.android.com/reference/android/car/Car), [CarPropertyManager](https://developer.android.com/reference/android/car/hardware/property/CarPropertyManager). No platform implementation or permission validation is inferred from this host test suite.
